@@ -17,9 +17,9 @@ export default {
       data.distribution.push({ type: 'BTC', address: '', percentage: 0 });
       this.set({ data });
     },
-    removeDistribution(distribution) {
+    removeDistribution(index) {
       const data = JSON.parse(JSON.stringify(this.get('data')));
-      data.distribution = data.distribution.filter(d => d !== distribution);
+      data.distribution.splice(index, 1);
       this.set({ data });
     }
   }
@@ -29,11 +29,11 @@ export default {
   <Textbox label="Bitmixer Code" bind:value="data.bitmixerCode" />
   <p></p>
   <h2>Distribution</h2>
-  {{#each data.distribution as item}}
+  {{#each data.distribution as item, index}}
     <Select label="Type" options="{{ ['BTC', 'LTC', 'DCR', 'ETC'] }}" bind:value="item.type" />
     <Textbox label="Address" bind:value="item.address" />
     <NumberInput label="Percentage" bind:value="item.percentage" step="5" />
-    <IconButton on:click="removeDistribution(item)">minus</IconButton>
+    <IconButton on:click="removeDistribution(index)">minus</IconButton>
     <br/>
   {{/each}}
   <p><IconButton on:click="addDistribution()">plus</IconButton></p>
