@@ -1,0 +1,50 @@
+<script>
+import { Shell, Panel, Menu, MenuItem } from 'nilui';
+import Address from './Address';
+import Config from './Config';
+
+export default {
+  components: { Shell, Panel, Menu, MenuItem, Address, Config },
+  data() {
+    const config = JSON.parse(window.localStorage.getItem('config') || '{"bitmixerCode":"","distribution":[]}');
+    return {
+      menuItems: [
+        { key: 'address', icon: 'qrcode' },
+        { key: 'config', icon: 'gear' }
+      ],
+      menuSelection: 'address',
+      config
+    };
+  },
+  computed: {
+    active(menuSelection) {
+      return function(key) {
+        return key === menuSelection;
+      };
+    }
+  },
+  oncreate() {
+    this.observe('config', config => window.localStorage.setItem('config', JSON.stringify(config)));
+  }
+}
+</script>
+<Shell>
+  <Panel style="width: 50px">
+    <Menu>
+      {{#each menuItems as menuItem}}
+        <MenuItem
+          key="{{menuItem.key}}"
+          active="{{active(menuItem.key)}}"
+          icon="{{menuItem.icon}}"
+          on:select="set({ menuSelection: menuItem.key })" />
+      {{/each}}
+    </Menu>
+  </Panel>
+  <Panel style="left: 50px; background: #fff; color: #000">
+    {{#if menuSelection === 'config'}}
+      <Config bind:data="config" />
+    {{else}}
+      <Address config="{{config}}" />
+    {{/if}}
+  </Panel>
+</Shell>
