@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server",
-    "release": "webpack -p && git add bundle.js && git add index.html && git commit -m \"Release the app.\" && git push origin master"
+    "release": "webpack && git add bundle.js && git add index.html && git commit -m \"Release the app.\" && git push origin master"
   },
   "repository": {
     "type": "git",
