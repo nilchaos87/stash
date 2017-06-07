@@ -1497,20 +1497,25 @@ var template = function () {
 			if (!head.querySelector('link[href*="Roboto"]')) {
 				head.appendChild((0, _nilutil.link)('https://fonts.googleapis.com/css?family=Roboto', 'stylesheet'));
 			}
+
+			head.appendChild((0, _nilutil.meta)('viewport', 'width=device-width'));
+			this.observe('favicon', function (url) {
+				return url && (0, _nilutil.favicon)(url);
+			});
 		}
 	};
 }();
 
 function add_css() {
 	var style = (0, _shared.createElement)('style');
-	style.id = "svelte-4087785446-style";
-	style.textContent = "\n[svelte-4087785446].shell-container, [svelte-4087785446] .shell-container {\n  background: #000;\n  color: #fff;\n  font-family: 'Roboto', sans-serif;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n}\n\n*[svelte-4087785446], [svelte-4087785446] * {\n  box-sizing: border-box;\n}\n";
+	style.id = "svelte-2563596050-style";
+	style.textContent = "\n[svelte-2563596050].shell-container, [svelte-2563596050] .shell-container {\n  background: #000;\n  color: #fff;\n  font-family: 'Roboto', sans-serif;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n}\n\n*[svelte-2563596050], [svelte-2563596050] * {\n  box-sizing: border-box;\n}\n";
 	(0, _shared.appendNode)(style, document.head);
 }
 
 function create_main_fragment(state, component) {
 	var div = (0, _shared.createElement)('div');
-	(0, _shared.setAttribute)(div, 'svelte-4087785446', '');
+	(0, _shared.setAttribute)(div, 'svelte-2563596050', '');
 	div.className = "shell-container";
 	component.refs.container = div;
 	if (component._yield) component._yield.mount(div, null);
@@ -1547,7 +1552,7 @@ function Shell(options) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if (!document.getElementById("svelte-4087785446-style")) add_css();
+	if (!document.getElementById("svelte-2563596050-style")) add_css();
 
 	this._fragment = create_main_fragment(this._state, this);
 	if (options.target) this._fragment.mount(options.target, null);
@@ -2244,7 +2249,8 @@ function create_main_fragment(state, component) {
 	var shell_1 = new __WEBPACK_IMPORTED_MODULE_0_nilui__["Shell"]({
 		target: null,
 		_root: component._root,
-		_yield: shell_1_yield_fragment
+		_yield: shell_1_yield_fragment,
+		data: { favicon: "./favicon.png" }
 	});
 
 	return {
