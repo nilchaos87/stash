@@ -2934,9 +2934,9 @@ var template = function () {
 				data.distribution.push({ type: 'BTC', address: '', percentage: 0 });
 				this.set({ data });
 			},
-			removeDistribution(distribution) {
+			removeDistribution(index) {
 				const data = JSON.parse(JSON.stringify(this.get('data')));
-				data.distribution = data.distribution.filter(d => d !== distribution);
+				data.distribution.splice(index, 1);
 				this.set({ data });
 			}
 		}
@@ -2945,8 +2945,8 @@ var template = function () {
 
 function add_css() {
 	var style = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('style');
-	style.id = "svelte-123692163-style";
-	style.textContent = "\n[svelte-123692163].config-container, [svelte-123692163] .config-container {\n  padding: 0.5rem;\n}\n";
+	style.id = "svelte-1604673500-style";
+	style.textContent = "\n[svelte-1604673500].config-container, [svelte-1604673500] .config-container {\n  padding: 0.5rem;\n}\n";
 	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["k" /* appendNode */])(style, document.head);
 }
 
@@ -2954,7 +2954,7 @@ function create_main_fragment(state, component) {
 	var textbox_updating = false;
 
 	var div = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('div');
-	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["l" /* setAttribute */])(div, 'svelte-123692163', '');
+	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["l" /* setAttribute */])(div, 'svelte-1604673500', '');
 	div.className = "config-container";
 
 	var textbox_initial_data = { label: "Bitmixer Code" };
@@ -3067,13 +3067,13 @@ function create_main_fragment(state, component) {
 	};
 }
 
-function create_each_block(state, each_block_value, item, item_index, component) {
+function create_each_block(state, each_block_value, item, index, component) {
 	var select_updating = false,
 	    textbox_updating = false,
 	    numberinput_updating = false;
 
 	var select_initial_data = { label: "Type", options: ['BTC', 'LTC', 'DCR', 'ETC'] };
-	if (item_index in each_block_value) select_initial_data.value = item.type;
+	if (index in each_block_value) select_initial_data.value = item.type;
 	var select = new __WEBPACK_IMPORTED_MODULE_0_nilui__["Select"]({
 		target: null,
 		_root: component._root,
@@ -3086,7 +3086,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			if (select_updating) return;
 			select_updating = true;
 			var list = this._context.each_block_value;
-			var index = this._context.item_index;
+			var index = this._context.index;
 			list[index].type = value;
 
 			component._set({ data: component.get('data') });
@@ -3096,13 +3096,13 @@ function create_each_block(state, each_block_value, item, item_index, component)
 
 	select._context = {
 		each_block_value: each_block_value,
-		item_index: item_index
+		index: index
 	};
 
 	var text = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
 
 	var textbox_initial_data = { label: "Address" };
-	if (item_index in each_block_value) textbox_initial_data.value = item.address;
+	if (index in each_block_value) textbox_initial_data.value = item.address;
 	var textbox = new __WEBPACK_IMPORTED_MODULE_0_nilui__["Textbox"]({
 		target: null,
 		_root: component._root,
@@ -3115,7 +3115,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			if (textbox_updating) return;
 			textbox_updating = true;
 			var list = this._context.each_block_value;
-			var index = this._context.item_index;
+			var index = this._context.index;
 			list[index].address = value;
 
 			component._set({ data: component.get('data') });
@@ -3125,13 +3125,13 @@ function create_each_block(state, each_block_value, item, item_index, component)
 
 	textbox._context = {
 		each_block_value: each_block_value,
-		item_index: item_index
+		index: index
 	};
 
 	var text_1 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
 
 	var numberinput_initial_data = { label: "Percentage", step: 5 };
-	if (item_index in each_block_value) numberinput_initial_data.value = item.percentage;
+	if (index in each_block_value) numberinput_initial_data.value = item.percentage;
 	var numberinput = new __WEBPACK_IMPORTED_MODULE_0_nilui__["NumberInput"]({
 		target: null,
 		_root: component._root,
@@ -3144,7 +3144,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			if (numberinput_updating) return;
 			numberinput_updating = true;
 			var list = this._context.each_block_value;
-			var index = this._context.item_index;
+			var index = this._context.index;
 			list[index].percentage = value;
 
 			component._set({ data: component.get('data') });
@@ -3154,11 +3154,11 @@ function create_each_block(state, each_block_value, item, item_index, component)
 
 	numberinput._context = {
 		each_block_value: each_block_value,
-		item_index: item_index
+		index: index
 	};
 
 	var text_2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
-	var iconbutton_1_yield_fragment = create_iconbutton_yield_fragment(state, each_block_value, item, item_index, component);
+	var iconbutton_1_yield_fragment = create_iconbutton_yield_fragment(state, each_block_value, item, index, component);
 
 	var iconbutton_1 = new __WEBPACK_IMPORTED_MODULE_0_nilui__["IconButton"]({
 		target: null,
@@ -3168,15 +3168,15 @@ function create_each_block(state, each_block_value, item, item_index, component)
 
 	iconbutton_1.on('click', function (event) {
 		var each_block_value = this._context.each_block_value,
-		    item_index = this._context.item_index,
-		    item = each_block_value[item_index];
+		    index = this._context.index,
+		    item = each_block_value[index];
 
-		component.removeDistribution(item);
+		component.removeDistribution(index);
 	});
 
 	iconbutton_1._context = {
 		each_block_value: each_block_value,
-		item_index: item_index
+		index: index
 	};
 
 	var text_3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
@@ -3195,7 +3195,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(br, target, anchor);
 		},
 
-		update: function (changed, state, each_block_value, item, item_index) {
+		update: function (changed, state, each_block_value, item, index) {
 			if (!select_updating && 'data' in changed) {
 				select_updating = true;
 				select._set({ value: item.type });
@@ -3203,7 +3203,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			}
 
 			select._context.each_block_value = each_block_value;
-			select._context.item_index = item_index;
+			select._context.index = index;
 
 			var select_changes = {};
 
@@ -3218,7 +3218,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			}
 
 			textbox._context.each_block_value = each_block_value;
-			textbox._context.item_index = item_index;
+			textbox._context.index = index;
 
 			if (!numberinput_updating && 'data' in changed) {
 				numberinput_updating = true;
@@ -3227,10 +3227,10 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			}
 
 			numberinput._context.each_block_value = each_block_value;
-			numberinput._context.item_index = item_index;
+			numberinput._context.index = index;
 
 			iconbutton_1._context.each_block_value = each_block_value;
-			iconbutton_1._context.item_index = item_index;
+			iconbutton_1._context.index = index;
 		},
 
 		unmount: function () {
@@ -3255,7 +3255,7 @@ function create_each_block(state, each_block_value, item, item_index, component)
 	};
 }
 
-function create_iconbutton_yield_fragment(state, each_block_value, item, item_index, component) {
+function create_iconbutton_yield_fragment(state, each_block_value, item, index, component) {
 	var text = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("minus");
 
 	return {
@@ -3302,7 +3302,7 @@ function Config(options) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if (!document.getElementById("svelte-123692163-style")) add_css();
+	if (!document.getElementById("svelte-1604673500-style")) add_css();
 	this._renderHooks = [];
 	this._bindings = [];
 
