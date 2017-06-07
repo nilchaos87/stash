@@ -2933,6 +2933,11 @@ var template = function () {
 				const data = JSON.parse(JSON.stringify(this.get('data')));
 				data.distribution.push({ type: 'BTC', address: '', percentage: 0 });
 				this.set({ data });
+			},
+			removeDistribution(distribution) {
+				const data = JSON.parse(JSON.stringify(this.get('data')));
+				data.distribution = data.distribution.filter(d => d !== distribution);
+				this.set({ data });
 			}
 		}
 	};
@@ -2940,8 +2945,8 @@ var template = function () {
 
 function add_css() {
 	var style = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('style');
-	style.id = "svelte-3847659376-style";
-	style.textContent = "\n[svelte-3847659376].config-container, [svelte-3847659376] .config-container {\n  padding: 0.5rem;\n}\n";
+	style.id = "svelte-123692163-style";
+	style.textContent = "\n[svelte-123692163].config-container, [svelte-123692163] .config-container {\n  padding: 0.5rem;\n}\n";
 	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["k" /* appendNode */])(style, document.head);
 }
 
@@ -2949,7 +2954,7 @@ function create_main_fragment(state, component) {
 	var textbox_updating = false;
 
 	var div = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('div');
-	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["l" /* setAttribute */])(div, 'svelte-3847659376', '');
+	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["l" /* setAttribute */])(div, 'svelte-123692163', '');
 	div.className = "config-container";
 
 	var textbox_initial_data = { label: "Bitmixer Code" };
@@ -2997,7 +3002,7 @@ function create_main_fragment(state, component) {
 	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["k" /* appendNode */])(text_4, div);
 	var p_1 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('p');
 	__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["k" /* appendNode */])(p_1, div);
-	var iconbutton_1_yield_fragment = create_iconbutton_yield_fragment(state, component);
+	var iconbutton_1_yield_fragment = create_iconbutton_yield_fragment_1(state, component);
 
 	var iconbutton_1 = new __WEBPACK_IMPORTED_MODULE_0_nilui__["IconButton"]({
 		target: p_1,
@@ -3153,6 +3158,28 @@ function create_each_block(state, each_block_value, item, item_index, component)
 	};
 
 	var text_2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
+	var iconbutton_1_yield_fragment = create_iconbutton_yield_fragment(state, each_block_value, item, item_index, component);
+
+	var iconbutton_1 = new __WEBPACK_IMPORTED_MODULE_0_nilui__["IconButton"]({
+		target: null,
+		_root: component._root,
+		_yield: iconbutton_1_yield_fragment
+	});
+
+	iconbutton_1.on('click', function (event) {
+		var each_block_value = this._context.each_block_value,
+		    item_index = this._context.item_index,
+		    item = each_block_value[item_index];
+
+		component.removeDistribution(item);
+	});
+
+	iconbutton_1._context = {
+		each_block_value: each_block_value,
+		item_index: item_index
+	};
+
+	var text_3 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("\n    ");
 	var br = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["j" /* createElement */])('br');
 
 	return {
@@ -3163,6 +3190,8 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(text_1, target, anchor);
 			numberinput._fragment.mount(target, anchor);
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(text_2, target, anchor);
+			iconbutton_1._fragment.mount(target, anchor);
+			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(text_3, target, anchor);
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(br, target, anchor);
 		},
 
@@ -3199,6 +3228,9 @@ function create_each_block(state, each_block_value, item, item_index, component)
 
 			numberinput._context.each_block_value = each_block_value;
 			numberinput._context.item_index = item_index;
+
+			iconbutton_1._context.each_block_value = each_block_value;
+			iconbutton_1._context.item_index = item_index;
 		},
 
 		unmount: function () {
@@ -3208,6 +3240,8 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["d" /* detachNode */])(text_1);
 			numberinput._fragment.unmount();
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["d" /* detachNode */])(text_2);
+			iconbutton_1._fragment.unmount();
+			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["d" /* detachNode */])(text_3);
 			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["d" /* detachNode */])(br);
 		},
 
@@ -3215,11 +3249,29 @@ function create_each_block(state, each_block_value, item, item_index, component)
 			select.destroy(false);
 			textbox.destroy(false);
 			numberinput.destroy(false);
+			iconbutton_1_yield_fragment.destroy();
+			iconbutton_1.destroy(false);
 		}
 	};
 }
 
-function create_iconbutton_yield_fragment(state, component) {
+function create_iconbutton_yield_fragment(state, each_block_value, item, item_index, component) {
+	var text = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("minus");
+
+	return {
+		mount: function (target, anchor) {
+			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["c" /* insertNode */])(text, target, anchor);
+		},
+
+		unmount: function () {
+			__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["d" /* detachNode */])(text);
+		},
+
+		destroy: __WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["m" /* noop */]
+	};
+}
+
+function create_iconbutton_yield_fragment_1(state, component) {
 	var text = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__Users_nick_Projects_nilchaos87_stash_node_modules_svelte_shared_js__["b" /* createText */])("plus");
 
 	return {
@@ -3250,7 +3302,7 @@ function Config(options) {
 	this._yield = options._yield;
 
 	this._torndown = false;
-	if (!document.getElementById("svelte-3847659376-style")) add_css();
+	if (!document.getElementById("svelte-123692163-style")) add_css();
 	this._renderHooks = [];
 	this._bindings = [];
 
