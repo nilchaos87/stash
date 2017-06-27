@@ -41,25 +41,26 @@ export default {
   components: { IconButton },
   methods: {
     createAddress() {
+      if (this.get('addressRequested')) return;
       const { bitmixerCode, distribution } = this.get('config');
       const fee = Math.random() * 0.25 + 0.5;
-      this.set({ error: '' });
+      this.set({ error: '', addressRequested: true });
       Promise.all(distribution.map(output))
         .then(outputs => outputs.map(mixerParameters).join('&'))
         .then(params => fetch(cors(`https://bitmixer.io/order.php?bitcode=${bitmixerCode}&fee=${fee}&${params}`)))
         .then(res => res.ok ? res.text() : Promise.reject(new Error('Bitmixer request failed!')))
         .then(parseMixerResponse)
         .then(({ addr: address }) => this.set({ address }))
-        .catch(({ message: error }) => this.set({ error }));
+        .catch(({ message: error }) => this.set({ error, addressRequested: false }));
     }
   }
 }
 </script>
 <div class="address-container">
-  <IconButton on:click="createAddress()">refresh</IconButton>
-  {{#if address}}
-    <p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{address}}" /></p>
-  {{/if}}
+  <img
+    class="address-qr {{addressRequested ? 'address-requested' : ''}} {{address ? 'has-address' : ''}}"
+    on:click="createAddress()"
+    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{address || 'No addresss'}}" />
   <div class="address">{{address || 'No address'}}</div>
   {{#if error}}
     <div class="error">ERROR: {{error}}</div>
@@ -68,6 +69,14 @@ export default {
 <style>
 .address-container {
   padding: 0.5rem;
+}
+
+.address-qr:not(.address-requested) {
+  cursor: pointer;
+}
+
+.address-qr:not(.has-address) {
+  opacity: 0.2;
 }
 
 .error {
