@@ -30,7 +30,7 @@ export default {
   <p></p>
   <h2>Distribution</h2>
   {{#each data.distribution as item, index}}
-    <Select label="Type" options="{{ ['BTC', 'LTC', 'DCR', 'ETC'] }}" bind:value="item.type" />
+    <Select label="Type" options="{{ ['BTC', 'LTC', 'ETC'] }}" bind:value="item.type" />
     <Textbox label="Address" bind:value="item.address" />
     <NumberInput label="Percentage" bind:value="item.percentage" step="5" />
     <IconButton on:click="removeDistribution(index)">minus</IconButton>
